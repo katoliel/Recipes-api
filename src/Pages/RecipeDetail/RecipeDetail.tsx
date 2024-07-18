@@ -7,6 +7,7 @@ import RecipeImage from "../../RecipeImage/RecipeImage";
 import Headings from "../../Headings";
 import RecipeLabels from "../../RecipeLabels";
 import IngredientsList from "../../IngredientsList";
+import { API_KEY, APP_ID } from "../../common/constans";
 
 interface Recipe {
   label: string;
@@ -24,16 +25,15 @@ const RecipeDetail: React.FC<Recipe> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const apiKey = "4cb5d8df6da9c23a48ac1803fcb8bcba";
-    const appId = "0fc9f206";
 
+
+  useEffect(() => {
     const fetchRecipe = async () => {
       try {
         setIsLoading(true);
         setError(null);
         const response = await axios.get(
-          `https://api.edamam.com/api/recipes/v2/${id}?type=public&app_id=${appId}&app_key=${apiKey}`
+          `https://api.edamam.com/api/recipes/v2/${id}?type=public&app_id=${APP_ID}&app_key=${API_KEY}`
         );
 
         if (response.data && response.data.recipe) {
